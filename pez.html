@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>limb ik</title>
+		<style>
+			body {margin: 0;}
+		</style>
+	</head>
+	<body>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" referrerpolicy="no-referrer"></script>
+		<script>
+
+			var scene = new THREE.Scene();
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			var A = 0.2;
+			var B = 6.4;
+			var a = 0.4;
+			var b = 0.9;
+
+			var A2 = 0.25;
+			var B2 = 6.25;
+			var a2 = 0.4;
+			var b2 = -1.6;
+
+			var A3 = 0.29;
+			var B3 = 6.25;
+			var a3 = 0.4;
+			var b3 = -1.5;
+
+			var contenedor = new THREE.Object3D;
+			var geometry = new THREE.BoxGeometry(1, 8, 1);
+			var material1 = new THREE.MeshBasicMaterial({color: 0xFF0000});
+			var cub1 = new THREE.Mesh(geometry, material1);
+			contenedor.add(cub1);
+			cub1.position.y = 4;
+			contenedor.rotation.x=1.36
+			scene.add(contenedor);
+
+			var contenedor2 = new THREE.Object3D;
+			var material2 = new THREE.MeshBasicMaterial({color: 0x00FFF0});
+			var cube2 = new THREE.Mesh(geometry, material2);
+			contenedor2.add(cube2);
+			cube2.position.y = 5;
+			scene.add(contenedor2);
+			contenedor2.position.y = 8;
+			contenedor.add(contenedor2);
+
+			var contenedor3 = new THREE.Object3D;
+			var material3 = new THREE.MeshBasicMaterial({color: 0xFBFF00});
+			var cube3 = new THREE.Mesh(geometry, material3);
+			contenedor3.add(cube3);
+			cube3.position.y = 4;
+			scene.add(contenedor3);
+			contenedor3.position.y = 10;
+			contenedor2.add(contenedor3);
+
+			var t = 0;
+			camera.position.z = 25;
+			camera.position.y = 30;
+			camera.rotation.x=-45
+
+
+			function animate() {
+
+				requestAnimationFrame(animate);
+
+				t += 0.1;
+
+				contenedor.rotation.z = A*Math.cos(a*t+b)+B;
+				contenedor2.rotation.z = A2*Math.cos(a2*t+b2)+B2;
+				contenedor3.rotation.z = A3*Math.cos(a3*t+b3)+B3;
+
+				renderer.render(scene, camera);
+			};
+
+			animate();
+		</script>
+	</body>
+</html>
